@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Verification</title>
+  <script src="https://web-sdk.prod.cdn.spain.ozforensics.com/blsinternational/plugin_liveness.php"></script>
+  <script>
+    window.addEventListener('load', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      OzLiveness.open({
+        lang: 'en',
+        meta: {
+          user_id: urlParams.get('user_id'),
+          transaction_id: urlParams.get('transaction_id')
+        },
+        action: ['video_selfie_blank'],
+        on_complete: function(result) {
+          window.location.href = `https://yourbackend.com/callback?session_id=${result.event_session_id}`;
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <p>Loading face verification...</p>
+</body>
+</html>
